@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from langchain.chains import ConversationalRetrievalChain
 from langchain_community.vectorstores import Chroma
@@ -13,7 +14,9 @@ st.set_page_config(
     # layout='wide'
 )
 # Paths
-LOCAL_VECTOR_STORE_DIR = "chroma_db"
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Construct the full path to the chroma_db folder
+LOCAL_VECTOR_STORE_DIR = os.path.join(current_dir, "chroma_db")
 def load_documents_from_chroma(api_key):
     # Initialize Chroma vector store
     vectordb = Chroma(
